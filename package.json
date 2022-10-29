@@ -1,0 +1,21 @@
+{
+  "name": "rustlings",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "build": "cargo-cp-artifact -nc index.node -- cargo build --message-format=json-render-diagnostics",
+    "build-win32": "cargo-cp-artifact -nc platform/win32/index.node -- cargo build --release --message-format=json-render-diagnostics",
+    "build-linux": "cargo-cp-artifact -nc platform/linux/index.node -- cargo build --release --message-format=json-render-diagnostics",
+    "build-macos": "cargo-cp-artifact -nc platform/macos/index.node -- cargo build --release --message-format=json-render-diagnostics",
+    "build-debug": "npm run build --",
+    "build-release": "npm run build -- --release",
+    "installs": "npm run build-release",
+    "test": "cargo test"
+  },
+  "author": "姜坤",
+  "license": "MIT",
+  "devDependencies": {
+    "cargo-cp-artifact": "^0.1"
+  }
+}

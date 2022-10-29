@@ -1,0 +1,74 @@
+name: Rustlings Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  job1:
+    build:
+      runs-on: ubuntu-latest
+
+      strategy:
+        matrix:
+          node-version: [16.x]
+
+      steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run build-linux
+      - name: upload result
+        uses: actions/upload-artifact@v1
+        with:
+          name: index.node
+          path: ${{ github.workspace }}/platform/linux
+
+  job2:
+    build:
+      runs-on: windows-latest
+
+      strategy:
+        matrix:
+          node-version: [16.x]
+
+      steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run build-win32
+      - name: upload result
+        uses: actions/upload-artifact@v1
+        with:
+          name: index.node
+          path: ${{ github.workspace }}/platform/win32
+
+  job3:
+    build:
+      runs-on: macos-latest
+
+      strategy:
+        matrix:
+          node-version: [16.x]
+
+      steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run build-macos
+      - name: upload result
+        uses: actions/upload-artifact@v1
+        with:
+          name: index.node
+          path: ${{ github.workspace }}/platform/macos
