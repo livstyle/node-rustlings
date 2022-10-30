@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "main": "main.js",
+  "bin": {
+    "nrustlings": "bin/rustlings.js"
+  },
   "scripts": {
     "build": "cargo-cp-artifact -nc index.node -- cargo build --message-format=json-render-diagnostics",
     "build-win32": "cargo-cp-artifact -nc platform/win32/index.node -- cargo build --release --message-format=json-render-diagnostics",

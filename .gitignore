@@ -6,3 +6,4 @@ npm-debug.log*
 *.pdb
 exercises/*
 info.toml
+check.toml

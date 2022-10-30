@@ -17,6 +17,8 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
+use crate::PATHCONFIG;
+
 // In sync with crate version
 const VERSION: &str = "5.2.1";
 
@@ -136,7 +138,7 @@ pub struct  ExerciseStatistics {
 
 
 #[tokio::main]
-pub async fn cmd(args: Args) {
+pub async fn cmd(args: Args) -> Result<Option<String>, std::io::Error> {
     // let args: Args = argh::from_env();
 
     if args.version {
@@ -165,7 +167,7 @@ pub async fn cmd(args: Args) {
     }
 
     let toml_str = &fs::read_to_string("info.toml").unwrap();
-    let exercises = toml::from_str::<ExerciseList>(toml_str).unwrap().exercises;
+    let mut exercises = toml::from_str::<ExerciseList>(toml_str).unwrap().exercises;
     let verbose = args.nocapture;
 
     let command = args.nested.unwrap_or_else(|| {
@@ -253,6 +255,11 @@ pub async fn cmd(args: Args) {
         }
 
         Subcommands::MyVerify(_subargs) => {
+            let _exec_path = &PATHCONFIG.get().unwrap().exercises_path;
+
+            let toml_str = &fs::read_to_string("check.toml").unwrap();
+            exercises = toml::from_str::<ExerciseList>(toml_str).unwrap().exercises;
+
             let now_start = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs();
             let rights = Arc::new(Mutex::new(0));
             let alls = exercises.len();
@@ -306,7 +313,8 @@ pub async fn cmd(args: Args) {
             }
             for task in tasks { task.await.unwrap(); }
             let serialized = serde_json::to_string_pretty(&*exercise_check_list.lock().unwrap()).unwrap();
-            fs::write(".github/result/check_result.json", serialized).unwrap();
+            fs::write(".github/result/check_result.json", &serialized).unwrap();
+            return Ok(Some(serialized))
         },
 
         Subcommands::Lsp(_subargs) => {
@@ -350,7 +358,7 @@ pub async fn cmd(args: Args) {
             }
         },
     }
-
+    Ok(None)
 }
 
 fn spawn_watch_shell(

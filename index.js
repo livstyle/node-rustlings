@@ -1,3 +1,7 @@
 const rust = require('.');
 
-rust.list();
+// rust.list();
+
+const checks = rust.myverify();
+
+console.log(checks);
