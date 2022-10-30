@@ -17,7 +17,7 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
-use crate::PATHCONFIG;
+// use crate::PATHCONFIG;
 
 // In sync with crate version
 const VERSION: &str = "5.2.1";
@@ -255,7 +255,7 @@ pub async fn cmd(args: Args) -> Result<Option<String>, std::io::Error> {
         }
 
         Subcommands::MyVerify(_subargs) => {
-            let _exec_path = &PATHCONFIG.get().unwrap().exercises_path;
+            // let _exec_path = &PATHCONFIG.get().unwrap().exercises_path;
 
             let toml_str = &fs::read_to_string("check.toml").unwrap();
             exercises = toml::from_str::<ExerciseList>(toml_str).unwrap().exercises;
@@ -312,8 +312,8 @@ pub async fn cmd(args: Args) -> Result<Option<String>, std::io::Error> {
                 tasks.push(t);
             }
             for task in tasks { task.await.unwrap(); }
-            let serialized = serde_json::to_string_pretty(&*exercise_check_list.lock().unwrap()).unwrap();
-            fs::write(".github/result/check_result.json", &serialized).unwrap();
+            let serialized = serde_json::to_string(&*exercise_check_list.lock().unwrap()).unwrap();
+            // fs::write(".github/result/check_result.json", &serialized).unwrap();
             return Ok(Some(serialized))
         },
 

@@ -4,4 +4,4 @@ const rust = require('.');
 
 const checks = rust.myverify();
 
-console.log(checks);
+console.log(JSON.parse(checks));
