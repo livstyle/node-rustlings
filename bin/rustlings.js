@@ -1,4 +1,4 @@
-const {program, Command} = require('commander');
+const {program} = require('commander');
 
 const rust = require('../');
 
