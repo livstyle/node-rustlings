@@ -12,6 +12,7 @@ env:
 jobs:
   job1:
     runs-on: ubuntu-latest
+    if: github.repository_owner == 'aaa'
     strategy:
       matrix:
         node-version: [16.x]
@@ -31,6 +32,7 @@ jobs:
 
   job2:
     runs-on: windows-latest
+    if: github.repository_owner == 'aaa'
     strategy:
       matrix:
         node-version: [16.x]
@@ -50,6 +52,7 @@ jobs:
 
   job3:
     runs-on: macos-latest
+    if: github.repository_owner == 'aaa'
     strategy:
       matrix:
         node-version: [16.x]
