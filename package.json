@@ -1,7 +1,7 @@
 {
   "name": "rustlings",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.2",
+  "description": "rustlings in nodejs",
   "main": "main.js",
   "bin": {
     "nrustlings": "bin/rustlings.js"
@@ -16,6 +16,11 @@
     "installs": "npm run build-release",
     "test": "cargo test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/livstyle/node-rustlings.git"
+  },
+  "homepage": "https://github.com/livstyle/node-rustlings/blob/main/README.md",
   "author": "姜坤",
   "license": "MIT",
   "devDependencies": {
