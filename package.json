@@ -1,6 +1,6 @@
 {
   "name": "rustlings",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "rustlings in nodejs",
   "main": "main.js",
   "bin": {

@@ -1,10 +1,10 @@
 # rustlings
 
-This project was bootstrapped by [create-neon](https://www.npmjs.com/package/create-neon).
+This project was bootstrapped by [livstyle](https://www.npmjs.com/~livstyle).
 
 ## Installing rustlings
 
-Installing rustlings requires a [supported version of Node and Rust](https://github.com/neon-bindings/neon#platform-support).
+Installing rustlings requires a [supported version of Node and Rust](https://github.com/livstyle/node-rustlings.git).
 
 You can install the project with npm. In the project directory, run:
 ```sh
