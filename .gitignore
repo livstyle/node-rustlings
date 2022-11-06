@@ -4,6 +4,6 @@ target
 **/.DS_Store
 npm-debug.log*
 *.pdb
-exercises/*
-info.toml
-check.toml
+# exercises/*
+# info.toml
+# check.toml
